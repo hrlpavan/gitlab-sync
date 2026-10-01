@@ -116,3 +116,13 @@ To turn all zeros into active numbers this week:
 | **Day 3** | Find a typo or small fix in [gitlab-docs](https://gitlab.com/gitlab-org/gitlab-docs) and submit an MR | 💻 **Code** $\rightarrow$ `+1` |
 | **Day 4** | Join [discord.gg/gitlab](https://discord.gg/gitlab) and link your GitLab handle | 🤝 **Engage** $\rightarrow$ `+1` |
 | **Day 5** | Create a well-documented issue or feature proposal in `gitlab-org` | 📋 **Plan** $\rightarrow$ `+1` (Total 5) |
+
+---
+
+## 🚀 Active Community Contributions
+
+- **Merge Request**: [gitlab-org/gitlab!259119](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/259119)
+  - **Title**: *Add enum constraint to scope parameter in MCP search tool*
+  - **Issue Closed**: [#595159](https://gitlab.com/gitlab-org/gitlab/-/work_items/595159)
+  - **Category Impact**: 💻 **Code** + 💬 **Discuss** + 📋 **Plan**
+  - **Status**: Under review by GitLab Community Coaches and Danger Bot!
