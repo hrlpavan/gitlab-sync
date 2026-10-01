@@ -119,6 +119,7 @@ The `gitlab-sync` private repository was created and initialized simultaneously 
 
 ### Files in this repository:
 - **`README.md`**: Complete architecture guide and session log.
+- **[`GITLAB_STATS_GUIDE.md`](GITLAB_STATS_GUIDE.md)**: Practical guide on how to increase every metric on your Official GitLab Contributor Stats banner (`Code`, `Plan`, `Engage`, `Discuss`, `Translate`, `Other`).
 - **`.github/workflows/mirror.yml`**: GitHub Actions workflow that automatically mirrors commits from GitHub to GitLab if you commit via web/cloud.
 - **`.gitlab-ci.yml`**: Native GitLab CI/CD pipeline template.
 - **`scripts/sync-all.sh`**: Helper script to synchronize all branches and tags between remotes.
