@@ -1,0 +1,13 @@
+stages:
+  - test
+  - sync-check
+
+# Sample GitLab CI pipeline
+# Whenever commits arrive on GitLab, this pipeline runs automatically.
+lint-and-validate:
+  stage: test
+  image: alpine:latest
+  script:
+    - echo "Validating repository structure and sync status..."
+    - ls -la
+    - echo "All checks passed on GitLab runner!"

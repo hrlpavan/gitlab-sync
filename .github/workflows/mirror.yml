@@ -1,0 +1,23 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  mirror:
+    name: Sync to GitLab
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to GitLab mirror
+        run: |
+          if [ -n "${{ secrets.GITLAB_TOKEN }}" ]; then
+            git push --prune --force https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/hrlpavan/${{ github.event.repository.name }}.git "refs/remotes/origin/*:refs/heads/*"
+          else
+            echo "GITLAB_TOKEN secret not configured. Skipping automated mirror."
+          fi
