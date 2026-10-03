@@ -246,4 +246,54 @@ curl -X POST \
 
 ---
 
+## 9. Third GitLab Community Contribution (Issue ai-assist#3001 / MR !7251)
+
+- **Target Issue**: [GitLab Issue ai-assist#3001](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/work_items/3001)
+- **Title**: *Add Gemini 4 (Argon) to model lifecycle: models.yml, eval, and pricing*
+- **Active Merge Request**: [GitLab MR !7251](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/merge_requests/7251)
+- **Target Repository**: `gitlab-org/modelops/applied-ml/code-suggestions/ai-assist` (Target branch: `main`)
+- **Community Source Remote**: `gitlab.com/gitlab-community/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist.git` (Branch: `3001-add-gemini-4-argon-model-lifecycle`)
+
+### Engineering Implementation & Specifications
+Integrated Google's new **Gemini 4 (Argon)** model into GitLab AI Gateway:
+1. **`models.yml` Entry**:
+   - `name`: "Gemini 4 Argon"
+   - `provider`: "Gemini Enterprise Agent Platform"
+   - `gitlab_identifier`: "gemini_4_argon_vertex"
+   - `description`: "Google's Gemini Pro model with advanced reasoning and agentic capabilities."
+   - `cost_indicator`: `$$$` (Calculated from introductory pricing: \$2/M input, \$10/M output, \$0.10/M cached input)
+   - `max_context_tokens`: 1,000,000
+   - `model_class_provider`: `google_genai`
+   - `family`: `[gemini]`
+   - `params`:
+     - `model`: "gemini-4-argon"
+     - `max_tokens`: 65,536
+     - `thinking_level`: "high"
+     - `streaming`: "true"
+2. **`unit_primitives.yml` Mappings**:
+   - Added `gemini_4_argon_vertex` in alphabetical order to `selectable_models` across:
+     - `duo_chat`
+     - `code_generations`
+     - `duo_agent_platform`
+     - `duo_agent_platform_agentic_chat`
+     - `duo_developer`
+3. **Validation & CI Resolution**:
+   - Tested locally via `validate_model_selection_config()` and all 467 tests in `tests/model_selection/` passed.
+   - Diagnosed `lint:commit` CI failure: GitLab AI Gateway enforces Conventional Commits on both git commit message and `$CI_MERGE_REQUEST_TITLE`.
+   - Updated title to `feat(model-selection): add Gemini 4 Argon to model registry` and retried job `16913758330`: **100% Passed**.
+   - Pipeline [`#2909374146`](https://gitlab.com/gitlab-community/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/pipelines/2909374146): **100% Passed (SUCCESS)** across unit tests, linters, and container builds.
+
+---
+
+## 10. GitHub Profile Workflow Fix (Contribution Snake Animation)
+
+- **Workflow Run**: [GitHub Actions Run 37132535825](https://github.com/hrlpavan/hrlpavan/actions/runs/37132535825)
+- **Root Cause**: `EndBug/add-and-commit@v9` failed in step `Commit & Push Snake Assets` because GitHub Actions defaults repository token permissions to read-only when `permissions` block is omitted.
+- **Fix Applied**:
+  - Added `permissions: contents: write` to the `build` job in `.github/workflows/snake.yml`.
+  - Rebased and pushed to `main`.
+- **Outcome**: Subsequent workflow run [37133359081](https://github.com/hrlpavan/hrlpavan/actions/runs/37133359081) completed with **100% Success**.
+
+---
+
 *Authored by **Pavan Kumar Sadashiv** (`@hrlpavan`)*
