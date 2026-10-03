@@ -217,6 +217,7 @@ During automated preflight review, GitLab's Danger bot and CI pipelines enforced
    - `docs-lint markdown` (Markdownlint syntax): **Passed**
    - `docs-lint links` (Lychee broken links check): **Passed**
    - `docs-lint hugo` (Hugo documentation compiler): **Passed**
+   - `docs-i18n-lint paths` (Orphaned localized redirects cleaned up): **Passed**
    - `danger-review`: **0 Errors**
 
 ---
