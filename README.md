@@ -12,6 +12,8 @@ A complete technical architecture, deep dive, and runbook for **`hrlpavan`** (`p
 4. [CI/CD Verification & Pipeline Fact-Check](#4-cicd-verification--pipeline-fact-check)
 5. [The "Cannot Merge" UI Indicator Explained](#5-the-cannot-merge-ui-indicator-explained)
 6. [Daily Workflow & Commands Cheat Sheet](#6-daily-workflow--commands-cheat-sheet)
+7. [Second GitLab Community Contribution (Issue omnibus-gitlab#841 / MR !9851)](#7-second-gitlab-community-contribution-issue-omnibus-gitlab841--mr-9851)
+8. [Automated Cross-Project MR Creation via GitLab API](#8-automated-cross-project-mr-creation-via-gitlab-api)
 
 ---
 
@@ -181,6 +183,65 @@ When all tests are green, signal to GitLab Community Coaches and Reviewer Roulet
 /label ~"workflow::ready for review"
 ```
 Or manage via the [GitLab Contributor Portal](https://contributors.gitlab.com/manage-issue).
+
+---
+
+## 7. Second GitLab Community Contribution (Issue omnibus-gitlab#841 / MR !9851)
+
+- **Target Issue**: [GitLab Issue omnibus-gitlab#841](https://gitlab.com/gitlab-org/omnibus-gitlab/-/work_items/841)
+- **Title**: *Document how to use the Docker image with self-signed certificate + Mattermost*
+- **Active Merge Request**: [GitLab MR !9851](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9851)
+- **Target Repository**: `gitlab-org/omnibus-gitlab` (Target branch: `master`)
+- **Community Source Remote**: `gitlab.com/gitlab-community/gitlab-org/omnibus-gitlab.git` (Branch: `hrlpavan-doc-mattermost-docker-ssl`)
+
+### Engineering Context & Root Cause
+When running GitLab in a Docker container configured with a custom or self-signed SSL/TLS certificate, integrating with external services like Mattermost fails during TLS handshake validation with:
+```plaintext
+x509: certificate signed by unknown authority
+```
+- **Why this occurs**: Mattermost is written in Go. Go's native `crypto/tls` runtime inspects the operating system root CA certificate store (`/etc/ssl/certs/ca-certificates.crt`). Adding custom certificates only to `/opt/gitlab/embedded/ssl/certs/` (used by GitLab's internal OpenSSL) does not automatically update Debian's system-level trust bundle inside the container.
+- **The Solution Documented**:
+  Added comprehensive troubleshooting guidance in [`doc/settings/ssl/ssl_troubleshooting.md`](https://gitlab.com/gitlab-org/omnibus-gitlab/-/blob/master/doc/settings/ssl/ssl_troubleshooting.md) under `## Mattermost with a self-signed certificate in a Docker container`:
+  1. Inspect container logs with `docker logs gitlab` to confirm `x509: certificate signed by unknown authority`.
+  2. Copy the self-signed certificate into `/usr/local/share/ca-certificates/` inside the container.
+  3. Execute `update-ca-certificates` (or `dpkg-reconfigure ca-certificates`) to rebuild the system bundle.
+  4. Ensure the certificate is also added to `/etc/gitlab/trusted-certs/` for GitLab's internal OpenSSL.
+  5. Run `gitlab-ctl reconfigure` and `gitlab-ctl restart`.
+
+### Danger Bot & CI/CD Review Progression
+During automated preflight review, GitLab's Danger bot and CI pipelines enforced strict contributing policies:
+1. **Commit Subject Capitalization**: Changed commit subject from lowercase `docs: ...` to uppercase `Document Mattermost self-signed certificate handling in Docker`.
+2. **Full Reference URLs**: Replaced short issue shorthand `#841` with the full canonical URL `Closes https://gitlab.com/gitlab-org/omnibus-gitlab/-/work_items/841`.
+3. **CI Linters (100% Passed)**:
+   - `docs-lint content` (Vale prose style guide compliance): **Passed**
+   - `docs-lint markdown` (Markdownlint syntax): **Passed**
+   - `docs-lint links` (Lychee broken links check): **Passed**
+   - `docs-lint hugo` (Hugo documentation compiler): **Passed**
+   - `danger-review`: **0 Errors**
+
+---
+
+## 8. Automated Cross-Project MR Creation via GitLab API
+
+Because GitLab community contributors develop in the shared community fork (`gitlab-community/gitlab-org/omnibus-gitlab`), opening an upstream Merge Request targeting canonical `gitlab-org/omnibus-gitlab` can hit 404s in the web UI when routes differ.
+
+We automated the submission using the GitLab REST API with our authenticated Personal Access Token:
+```bash
+curl -X POST \
+  -H "PRIVATE-TOKEN: <GITLAB_PAT>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "source_branch": "hrlpavan-doc-mattermost-docker-ssl",
+    "target_branch": "master",
+    "target_project_id": 20699,
+    "title": "Document Mattermost self-signed certificate handling in Docker",
+    "description": "## What does this MR do and why?\n\nDocuments how to configure self-signed SSL certificates with Mattermost in a GitLab Docker container to resolve `x509: certificate signed by unknown authority` errors.\n\nCloses https://gitlab.com/gitlab-org/omnibus-gitlab/-/work_items/841"
+  }' \
+  "https://gitlab.com/api/v4/projects/44355627/merge_requests"
+```
+- **Source Project ID (`44355627`)**: `gitlab-community/gitlab-org/omnibus-gitlab` (where the branch lives).
+- **Target Project ID (`20699`)**: `gitlab-org/omnibus-gitlab` (upstream canonical repo).
+- **Result**: Immediate creation of upstream Merge Request **[!9851](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9851)** with automatic linkage to Work Item #841.
 
 ---
 
