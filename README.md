@@ -297,3 +297,64 @@ Integrated Google's new **Gemini 4 (Argon)** model into GitLab AI Gateway:
 ---
 
 *Authored by **Pavan Kumar Sadashiv** (`@hrlpavan`)*
+
+---
+
+## 11. GitLab Contributor Platform: Scoring Model, Level Milestones & Fast-Track Strategy
+
+- **Platform**: [GitLab Contributor Platform](https://contributors.gitlab.com)
+- **Profile**: [`hrlpavan` Contributor Profile](https://contributors.gitlab.com/users/hrlpavan)
+- **Objective**: Accelerate progression through Contributor Tiers to earn profile badges, store credits, and Core Team Developer permissions.
+
+### Contribution Points System
+Points are tracked automatically across activity in `gitlab-org`, `gitlab-community`, and associated ecosystems:
+- **Merge Request Created**: `+20 pts`
+- **Commit Merged**: `+20 pts` per commit
+- **Merge Request Merged**: `+60 pts`
+- **Linked Issue (`Closes #...`)**: `+30 pts` bonus
+- **Community Bonus Label (`community-bonus::100`)**: `+100 pts` bonus
+- **Expected Yield per Merged MR**: `~130 pts` (or `~230 pts` with community bonus)
+
+### Contributor Levels & Thresholds
+| Level | Badge | Points Required | Rewards & Store Credits |
+| :--- | :---: | :---: | :--- |
+| **Level 1** | Badge 1 | **25 pts** | Level 1 badge on profile, 5 Contributor Success store credits |
+| **Level 2** | Badge 2 | **500 pts** | Level 2 badge on profile, 50 Contributor Success store credits |
+| **Level 3** | Badge 3 | **2,500 pts** | Level 3 badge on profile, 150 Contributor Success store credits |
+| **Level 4** | Badge 4 | **7,500 pts** | Level 4 badge on profile, 300 Contributor Success store credits |
+| **Level 5** | Badge 5 | **37,500+ pts** | Level 5 badge on profile, 600 Contributor Success store credits |
+| **Core Team** | Core Badge | **Election** | Profile achievement, 300 credits, 1 GitLab Ultimate personal license, Slack access, and **Developer permission for GitLab projects** |
+
+---
+
+## 12. Active Upstream Portfolio & High-Yield Backlog Queue
+
+### Active Open Merge Requests (All CI 100% Green)
+1. **AI Gateway [MR !7251](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/merge_requests/7251)**:
+   - Target: `gitlab-org/modelops/applied-ml/code-suggestions/ai-assist`
+   - Closes: [ai-assist#3001](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/work_items/3001)
+   - Scope: Added Google Gemini 4 Argon (`gemini_4_argon_vertex`) to `models.yml` and `unit_primitives.yml`.
+   - Pipeline: `#2909374146` (24/24 passed). Reviewers: `@nlee8` & `@eduardobonet`.
+   - Points on Merge: `~130 pts`.
+2. **Omnibus GitLab [MR !9851](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9851)**:
+   - Target: `gitlab-org/omnibus-gitlab`
+   - Closes: [omnibus-gitlab#841](https://gitlab.com/gitlab-org/omnibus-gitlab/-/work_items/841)
+   - Scope: Mattermost Docker self-signed SSL troubleshooting documentation.
+   - Pipeline: 100% Passed (Vale, Lychee, Markdownlint, Hugo, Danger).
+   - Points on Merge: `~130 pts`.
+3. **GitLab Core [MR !259119](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/259119)**:
+   - Target: `gitlab-org/gitlab`
+   - Closes: [gitlab#595159](https://gitlab.com/gitlab-org/gitlab/-/work_items/595159) (`community-bonus::100`)
+   - Scope: Add enum constraint to search scope parameter in MCP Server JSON schema (`app/services/mcp/tools/search/search_service.rb`).
+   - Pipeline: Passed.
+   - Points on Merge: `~230 pts` (includes +100 bonus).
+
+**Portfolio Total Potential**: **~490 Points** (Instantly passes Level 1, places contributor at 98% of Level 2).
+
+### Next High-Yield Targets
+- **[Issue ai-assist#3059](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/work_items/3059)**: *Remove unused `candidates` field from model-selection config* (+130 pts, ~10 min fix).
+- **[Issue gitlab#584258](https://gitlab.com/gitlab-org/gitlab/-/work_items/584258)**: *[MCP Server] Add missing resource templates endpoint from spec* (+230 pts, `community-bonus::100`).
+
+---
+
+*Authored by **Pavan Kumar Sadashiv** (`@hrlpavan`)*
