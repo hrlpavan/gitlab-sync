@@ -14,6 +14,8 @@ A complete technical architecture, deep dive, and runbook for **`hrlpavan`** (`p
 6. [Daily Workflow & Commands Cheat Sheet](#6-daily-workflow--commands-cheat-sheet)
 7. [Second GitLab Community Contribution (Issue omnibus-gitlab#841 / MR !9851)](#7-second-gitlab-community-contribution-issue-omnibus-gitlab841--mr-9851)
 8. [Automated Cross-Project MR Creation via GitLab API](#8-automated-cross-project-mr-creation-via-gitlab-api)
+9. [Third GitLab Community Contribution (Issue ai-assist#3001 / MR !7251)](#9-third-gitlab-community-contribution-issue-ai-assist3001--mr-7251)
+10. [Fourth GitLab Community Contribution (Issue gitlab#584258 / MR !260212)](#14-fourth-gitlab-community-contribution-issue-gitlab584258--mr-260212)
 
 ---
 
@@ -330,30 +332,35 @@ Points are tracked automatically across activity in `gitlab-org`, `gitlab-commun
 ## 12. Active Upstream Portfolio & High-Yield Backlog Queue
 
 ### Active Open Merge Requests (All CI 100% Green)
-1. **AI Gateway [MR !7251](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/merge_requests/7251)**:
+1. **GitLab Core [MR !260212](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/260212)**:
+   - Target: `gitlab-org/gitlab`
+   - Closes: [gitlab#584258](https://gitlab.com/gitlab-org/gitlab/-/work_items/584258) (`community-bonus::100`, `Hackathon`)
+   - Scope: Implement `resources/list` and `resources/templates/list` JSON-RPC handlers and advertise `resources` capability in MCP `initialize` handshake.
+   - Pipeline: `#2920838796` (`danger-review`, `rubocop`, `rspec:predictive` `#2920850968`, and `rspec-ee:predictive` `#2920850967` passed).
+   - Points on Merge: `~230 pts` (includes +100 bonus + October 2026 Hackathon qualification).
+2. **AI Gateway [MR !7251](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/merge_requests/7251)**:
    - Target: `gitlab-org/modelops/applied-ml/code-suggestions/ai-assist`
    - Closes: [ai-assist#3001](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/work_items/3001)
    - Scope: Added Google Gemini 4 Argon (`gemini_4_argon_vertex`) to `models.yml` and `unit_primitives.yml`.
    - Pipeline: `#2909374146` (24/24 passed). Reviewers: `@nlee8` & `@eduardobonet`.
    - Points on Merge: `~130 pts`.
-2. **Omnibus GitLab [MR !9851](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9851)**:
+3. **Omnibus GitLab [MR !9851](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9851)**:
    - Target: `gitlab-org/omnibus-gitlab`
    - Closes: [omnibus-gitlab#841](https://gitlab.com/gitlab-org/omnibus-gitlab/-/work_items/841)
    - Scope: Mattermost Docker self-signed SSL troubleshooting documentation.
    - Pipeline: 100% Passed (Vale, Lychee, Markdownlint, Hugo, Danger).
    - Points on Merge: `~130 pts`.
-3. **GitLab Core [MR !259119](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/259119)**:
+4. **GitLab Core [MR !259119](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/259119)**:
    - Target: `gitlab-org/gitlab`
    - Closes: [gitlab#595159](https://gitlab.com/gitlab-org/gitlab/-/work_items/595159) (`community-bonus::100`)
    - Scope: Add enum constraint to search scope parameter in MCP Server JSON schema (`app/services/mcp/tools/search/search_service.rb`).
    - Pipeline: Passed.
    - Points on Merge: `~230 pts` (includes +100 bonus).
 
-**Portfolio Total Potential**: **~490 Points** (Instantly passes Level 1, places contributor at 98% of Level 2).
+**Portfolio Total Potential**: **~720 Points** (Surpasses both **Level 1 (25 pts)** and **Level 2 (500 pts)** milestones).
 
 ### Next High-Yield Targets
 - **[Issue ai-assist#3059](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/work_items/3059)**: *Remove unused `candidates` field from model-selection config* (+130 pts, ~10 min fix).
-- **[Issue gitlab#584258](https://gitlab.com/gitlab-org/gitlab/-/work_items/584258)**: *[MCP Server] Add missing resource templates endpoint from spec* (+230 pts, `community-bonus::100`).
 
 ---
 
@@ -366,6 +373,29 @@ Points are tracked automatically across activity in `gitlab-org`, `gitlab-commun
 On **2026-10-06**, expanded the master portfolio catalog (`all-projects-portfolio`) from **31 projects to 52 projects** and executed full multi-platform synchronization across `github.com/hrlpavan` and `gitlab.com/hrlpavan`:
 
 - **Master Portfolio (`all-projects-portfolio`)**: All 52 project deep-dives (`projects/01..52.md`) and `PROJECTS.json` synced to both GitHub and GitLab.
-- **Daily Engineering Telemetry (`daily-project-updates`)**: All daily engineering logs (`2026-09-23` through `2026-10-06`) and `projects_registry.json` mirrored on both GitHub and GitLab.
+- **Daily Engineering Telemetry (`daily-project-updates`)**: All daily engineering logs (`2026-09-23` through `2026-10-07`) and `projects_registry.json` mirrored on both GitHub and GitLab.
 - **Executive Profile (`hrlpavan`)**: Synchronized across both GitHub (`github.com/hrlpavan/hrlpavan`) and GitLab (`gitlab.com/hrlpavan/hrlpavan`).
 - **Newly Published Local Repositories**: `google-earth-mcp`, `ai-cinematic-haze-ofx`, `hrl-legal-ip-dmca-policy`, and `kit-app-template` published and dual-synced across both platforms.
+
+---
+
+## 14. Fourth GitLab Community Contribution (Issue gitlab#584258 / MR !260212)
+
+- **Target Issue**: [GitLab Issue #584258](https://gitlab.com/gitlab-org/gitlab/-/work_items/584258) (`community-bonus::100`, `automation:quick-win`)
+- **Title**: *[MCP Server] Add missing resource templates endpoint from spec*
+- **Active Merge Request**: [GitLab MR !260212](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/260212) (`Hackathon` — October 2026 GitLab Hackathon)
+- **Target Repository**: `gitlab-org/gitlab` (Target branch: `master`)
+- **Working Branch**: `584258-add-mcp-resource-templates-endpoint` (`a9aa12355011fd3633e51c52204ec7bb76cb541c`)
+
+### Engineering Implementation & Specifications
+1. **Protocol Handlers (`lib/api/mcp/handlers/`)**:
+   - Created `API::Mcp::Handlers::ListResources` (`lib/api/mcp/handlers/list_resources.rb`) returning `{ resources: [] }`.
+   - Created `API::Mcp::Handlers::ListResourceTemplates` (`lib/api/mcp/handlers/list_resource_templates.rb`) returning `{ resourceTemplates: [] }`.
+2. **Router & Handshake Capabilities**:
+   - Registered `'resources/list' => Handlers::ListResources` and `'resources/templates/list' => Handlers::ListResourceTemplates` in `API::Mcp::Base::JSONRPC_METHOD_HANDLERS` (`lib/api/mcp/base.rb`).
+   - Added `resources: { subscribe: false, listChanged: false }` to `capabilities` in `API::Mcp::Handlers::InitializeRequest` (`lib/api/mcp/handlers/initialize_request.rb`).
+3. **RSpec Verification (`#2920838796`)**:
+   - Added unit specs (`spec/lib/api/mcp/handlers/list_resources_spec.rb`, `spec/lib/api/mcp/handlers/list_resource_templates_spec.rb`) and request specs (`spec/requests/api/mcp/handlers/list_resources_spec.rb`, `spec/requests/api/mcp/handlers/list_resource_templates_spec.rb`).
+   - Updated `spec/requests/api/mcp/base_spec.rb` and `spec/requests/api/mcp/handlers/initialize_request_spec.rb`.
+   - Verified `danger-review` (**SUCCESS**), `rubocop` (**SUCCESS**), `rspec:predictive` (`#2920850968`, **SUCCESS**), and `rspec-ee:predictive` (`#2920850967`, **SUCCESS**).
+
